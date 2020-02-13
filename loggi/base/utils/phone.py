@@ -30,10 +30,12 @@ def format_phone_number(phone_number):
     :param phone_number (str): A phone number with or without region codes
     :return (str): A nicely formatted phone number
     """
-    if not phone_number:
-        return phone_number
-
     phone_number = normalize_phone_number(phone_number)
+    if not phone_number:
+        return None
+
+    if phone_number.startswith('00'):
+        phone_number = phone_number[2:]
     has_bra_country_code = phone_number.startswith('55')
     phone = '{}{}'.format('+' if has_bra_country_code else '+55', phone_number)
 
